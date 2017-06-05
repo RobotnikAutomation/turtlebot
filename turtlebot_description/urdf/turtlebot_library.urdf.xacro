@@ -12,6 +12,7 @@
   <!-- Stacks -->
   <xacro:include filename="$(find turtlebot_description)/urdf/stacks/circles.urdf.xacro"/>
   <xacro:include filename="$(find turtlebot_description)/urdf/stacks/hexagons.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/stacks/hexagons1.urdf.xacro"/>
   <!-- 3D Sensors -->
   <xacro:include filename="$(find turtlebot_description)/urdf/sensors/kinect.urdf.xacro"/>
   <xacro:include filename="$(find turtlebot_description)/urdf/sensors/asus_xtion_pro.urdf.xacro"/>
@@ -20,6 +21,7 @@
   <!-- 2D Sensors -->
   <xacro:include filename="$(find turtlebot_description)/urdf/sensors/rplidar.urdf.xacro"/>
   <xacro:include filename="$(find turtlebot_description)/urdf/sensors/hokuyo_urg04lx.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/hokuyo_ust10lx.urdf.xacro"/>
   <!-- Arms -->
   <xacro:include filename="$(find widowx_arm_description)/urdf/widowx.urdf.xacro"/>
   <xacro:include filename="$(find phantomx_reactor_arm_description)/urdf/phantomx_reactor_no_wrist.urdf.xacro"/>

@@ -11,7 +11,9 @@
   
   <kobuki/>
   <stack_hexagons parent="base_link"/>
-  <sensor_astra parent="base_link"/>
+  <sensor_astra parent="plate_middle_link">
+	  <origin xyz="-0.086 0.008 0.094" rpy="0.0 0.0 0.0"/>
+  </sensor_astra>
   <phantomx_reactor_no_wrist parent="plate_top_link" prefix="arm_">
 		<origin xyz="0.0 0.0 0.003" rpy="0.0 0.0 0.0"/>
   </phantomx_reactor_no_wrist>
