@@ -14,23 +14,23 @@
 			args="--manager=dxl_manager
 				--port=arbotix_port
 				--type=simple
-				gripper_revolute_joint
-				wrist_roll_joint
-				wrist_pitch_joint
-				elbow_pitch_joint
-				shoulder_pitch_joint
-				shoulder_yaw_joint"
+				arm_gripper_revolute_joint
+				arm_wrist_roll_joint
+				arm_wrist_pitch_joint
+				arm_elbow_pitch_joint
+				arm_shoulder_pitch_joint
+				arm_shoulder_yaw_joint"
 			output="screen"/>
 
 	<node name="dynamixel_controller_spawner2" pkg="dynamixel_controllers" type="controller_spawner.py"
 			args="--manager=dxl_manager
 				--type=meta
 				arm_controller
-				wrist_roll_joint
-				wrist_pitch_joint
-				elbow_pitch_joint
-				shoulder_pitch_joint
-				shoulder_yaw_joint"
+				arm_wrist_roll_joint
+				arm_wrist_pitch_joint
+				arm_elbow_pitch_joint
+				arm_shoulder_pitch_joint
+				arm_shoulder_yaw_joint"
 			output="screen"/>
 
 	<node name="grip_controller" pkg="arbotix_controllers" type="gripper_controller" output="screen" >
