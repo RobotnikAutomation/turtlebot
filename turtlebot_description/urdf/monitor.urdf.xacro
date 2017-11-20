@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot name="monitor" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_gazebo.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_properties.urdf.xacro"/>
+  
+  <xacro:macro name="monitor" params="parent astra_cam_pz">
+    <joint name="main_pole_joint" type="fixed">
+      <origin xyz="-0.06675 0 0" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="monitor_pole_link" />
+    </joint>
+
+    <link name="monitor_pole_link">
+      <visual>
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+         <mesh filename="package://turtlebot_description/meshes/monitor/monitor_pole.dae"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="monitor_joint" type="fixed">
+      <origin xyz="0.020153 0 1.007081" rpy="0 ${-M_PI/4} 0"/>
+      <parent link="monitor_pole_link"/>
+      <child link="monitor_link" />
+    </joint>
+    <link name="monitor_link">
+      <visual>
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+         <mesh filename="package://turtlebot_description/meshes/monitor/lilliput_monitor.dae"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <xacro:include filename="$(find turtlebot_description)/urdf/sensors/astra_cases.urdf.xacro"/>
+    <sensor_astra  parent="monitor_pole_link" astra_cam_pz="${astra_cam_pz}"/>
+  </xacro:macro>
+</robot>

@@ -6,8 +6,15 @@
   <arg name="stacks"/>
   <arg name="3d_sensor"/>
   <arg name="top_plate_device" default=""/>
-  
-  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/$(arg base)_$(arg stacks)_$(arg 3d_sensor)_$(arg top_plate_device).urdf.xacro'" />
-  <param name="robot_description" command="$(arg urdf_file)" />
+  <arg name="cases" default=""/>
+  <group unless="$(eval arg('cases') == '')">
+    <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/$(arg base)_$(arg stacks)_$(arg 3d_sensor)_cases_$(arg top_plate_device).urdf.xacro'" />
+    <param name="robot_description" command="$(arg urdf_file) $(arg 3d_sensor)_cam_pz:=0.7" />
+  </group>
+
+  <group if="$(eval arg('cases') == '')">
+    <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/$(arg base)_$(arg stacks)_$(arg 3d_sensor)_$(arg top_plate_device).urdf.xacro'" />
+    <param name="robot_description" command="$(arg urdf_file)" />
+  </group>
 
 </launch>

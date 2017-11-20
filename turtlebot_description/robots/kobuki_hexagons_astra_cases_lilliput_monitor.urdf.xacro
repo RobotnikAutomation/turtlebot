@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+    - Base      : kobuki
+    - Stacks    : hexagons
+    - 3d Sensor : astra
+    - Cases     : yes
+-->    
+<robot name="turtlebot" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="astra_cam_pz" default="0.5"/>
+
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_common_library.urdf.xacro" />
+  <xacro:include filename="$(find kobuki_description)/urdf/kobuki.urdf.xacro" />
+  <xacro:include filename="$(find turtlebot_description)/urdf/stacks/hexagons_upper.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/cases.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/monitor.urdf.xacro"/>
+
+  
+  <kobuki/>
+  <stack_hexagons parent="base_link"/>
+  <turtlebot_cases parent="plate_top_link"/>
+  <monitor parent="plate_top_link" astra_cam_pz="$(arg astra_cam_pz)"/>
+</robot>

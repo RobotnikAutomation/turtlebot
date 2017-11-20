@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot name="turtlebot_cases" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_gazebo.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_properties.urdf.xacro"/>
+  
+  <xacro:macro name="turtlebot_cases" params="parent">
+    <joint name="turtlebot_cases_joint" type="fixed">
+      <origin xyz="0.01364 0 -0.3312" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="cases_link" />
+    </joint>
+    <link name="cases_link">
+      <visual>
+       <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+         <mesh filename="package://turtlebot_description/meshes/monitor/turtlebot_cases.dae"/>
+        </geometry>
+      </visual>
+    </link>
+  </xacro:macro>
+
+</robot>
