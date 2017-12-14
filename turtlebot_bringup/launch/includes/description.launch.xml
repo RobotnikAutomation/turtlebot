@@ -14,7 +14,10 @@
 
   <group if="$(eval arg('cases') == '')">
     <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find turtlebot_description)/robots/$(arg base)_$(arg stacks)_$(arg 3d_sensor)_$(arg top_plate_device).urdf.xacro'" />
-    <param name="robot_description" command="$(arg urdf_file)" />
+    <param name="robot_description" command="$(arg urdf_file)"/>
+    <param name="stacks" value="$(arg stacks)"/>
+    <param name="3d_sensor" value="$(arg 3d_sensor)"/>
+    <param name="top_plate_device" value="$(arg top_plate_device)"/>
   </group>
 
 </launch>
