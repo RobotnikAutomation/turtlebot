@@ -20,9 +20,9 @@
   <!-- 2D Sensors -->
   <xacro:include filename="$(find turtlebot_description)/urdf/sensors/rplidar.urdf.xacro"/>
   <xacro:include filename="$(find turtlebot_description)/urdf/sensors/hokuyo_urg04lx.urdf.xacro"/>
-  <!-- Arms -->
+  <!-- Arms >
   <xacro:include filename="$(find widowx_arm_description)/urdf/widowx.urdf.xacro"/>
   <xacro:include filename="$(find phantomx_reactor_arm_description)/urdf/phantomx_reactor_no_wrist.urdf.xacro"/>
-  <xacro:include filename="$(find phantomx_reactor_arm_description)/urdf/phantomx_reactor_wrist.urdf.xacro"/>
+  <xacro:include filename="$(find phantomx_reactor_arm_description)/urdf/phantomx_reactor_wrist.urdf.xacro"/-->
 
 </robot>
