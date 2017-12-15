@@ -8,7 +8,7 @@
     <param name="scale_linear" value="0.5"/>
     <param name="axis_deadman" value="5"/>
     <param name="axis_linear" value="1"/>
-    <param name="axis_angular" value="3"/>
+    <param name="axis_angular" value="2"/>
     <remap from="turtlebot_teleop_joystick/cmd_vel" to="cmd_vel_mux/input/teleop"/>
   </node>
 
