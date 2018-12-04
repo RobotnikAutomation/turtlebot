@@ -1,2 +1,2 @@
-SUBSYSTEMS=="usb", DRIVERS=="cp210x", ATTRS{interface}=="CP2102 USB to UART Bridge Controller", MODE:="0666", GROUP:="dialout", SYMLINK+="rplidar"
+SUBSYSTEMS=="usb", DRIVERS=="cp210x", ATTRS{interface}=="CP2102 USB to UART Bridge Controller", MODE="0666", GROUP="dialout", SYMLINK+="rplidar"
 
