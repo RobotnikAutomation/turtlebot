@@ -23,7 +23,7 @@
   <sensor_rplidar parent="plate_middle_link" prefix="turtlebot">
 		<origin xyz="0.0 0 0.0" rpy="0 0 3.14"/> 
   </sensor_rplidar>
-  <widowx_arm parent="plate_top_link" prefix="turtlebot_">
+  <widowx_arm parent="plate_top_link" prefix="">
 		<origin xyz="0.05 0 0" rpy="0 0 0"/>
   </widowx_arm>
   
