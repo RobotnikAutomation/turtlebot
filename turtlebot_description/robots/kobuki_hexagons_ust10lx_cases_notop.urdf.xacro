@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+    - Base      : kobuki
+    - Stacks    : hexagons
+    - 3d Sensor : ust10lx
+    - Cases     : yes
+-->    
+<robot name="turtlebot" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_common_library.urdf.xacro" />
+  <xacro:include filename="$(find kobuki_description)/urdf/kobuki.urdf.xacro" />
+  <xacro:include filename="$(find turtlebot_description)/urdf/stacks/hexagons_upper.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/cases.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/hokuyo_ust10lx.urdf.xacro"/>
+
+  
+  <kobuki/>
+  <stack_hexagons parent="base_link"/>
+  <turtlebot_cases parent="plate_top_link"/>
+  <sensor_hokuyo_ust10lx name="front_laser" parent="plate_middle_link" min_angle="-2.094" max_angle="2.094" >
+		<origin xyz="0.160 0 0.0525" rpy="0 0 0" /> 
+  </sensor_hokuyo_ust10lx>
+</robot>

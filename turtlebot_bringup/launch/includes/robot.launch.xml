@@ -2,11 +2,11 @@
   Collection of robot-centric definitions and nodes for the turtlebot. 
  -->
 <launch>
-  <arg name="base"/>
-  <arg name="stacks"/>
-  <arg name="3d_sensor"/>
-  <arg name="top_plate_device"/>
-  <arg name="cases"/>
+  <arg name="base" default="create"/>
+  <arg name="stacks" default="hexagons"/>
+  <arg name="3d_sensor" default="astra"/>
+  <arg name="top_plate_device" default="notop" />
+  <arg name="cases" default=""/>
   
   <include file="$(find turtlebot_bringup)/launch/includes/description.launch.xml">
     <arg name="base" value="$(arg base)" />

@@ -3,7 +3,7 @@
  
   <arg name="node_name"  default="urg_node"/>
   <arg name="ip_address"  default="192.168.0.10"/>
-  <arg name="frame_id"  default="laser_link"/>
+  <arg name="frame_id"  default="$(arg node_name)_laser_link"/>
   <arg name="scan_topic"  default="scan"/>
   <arg name="angle_min"  default="-2.35619"/>
   <arg name="angle_max"  default="2.35619"/>
