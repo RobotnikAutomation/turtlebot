@@ -26,7 +26,7 @@
     <param name="angle_min" value="$(arg angle_min)"/>
     <param name="angle_max" value="$(arg angle_max)"/>
 
-    <remap from="scan" to="$(arg node_name)/$(arg scan_topic)"/>
+    <remap from="scan" to="$(arg scan_topic)"/>
 
   </node> 
 
