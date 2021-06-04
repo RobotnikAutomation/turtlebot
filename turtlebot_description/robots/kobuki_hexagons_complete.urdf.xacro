@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!--
+    - Base      : kobuki
+    - Stacks    : hexagons
+    - bottom_palte_device : hokuyo_10lx
+    - mid_plate_device: orbec astra, rplidar
+    - top_plate_device: orbec astra, rplidar, arm
+-->    
+<robot name="turtlebot" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find turtlebot_description)/urdf/stacks/hexagons.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_common_library.urdf.xacro" />
+  <xacro:include filename="$(find kobuki_description)/urdf/kobuki.urdf.xacro" />
+  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/hokuyo.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/orbbec_astra.urdf.xacro"/>
+  <!--xacro:include filename="$(find turtlebot_description)/urdf/sensors/rplidar.urdf.xacro"/-->
+  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/r200.urdf.xacro"/>
+  <xacro:include filename="$(find widowx_arm_description)/urdf/widowx.urdf.xacro"/>
+  <xacro:include filename="$(find phantomx_reactor_arm_description)/urdf/phantomx_reactor_wrist.urdf.xacro" />
+    <xacro:include filename="$(find phantomx_reactor_arm_description)/urdf/phantomx_reactor_no_wrist.urdf.xacro" />
+  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/rplidar_a2.urdf.xacro"/>
+
+
+
+  <xacro:arg name="has_wrist" default="false"/>
+  <xacro:arg name="bottom_plate_device" default="none"/>
+  <xacro:arg name="mid_plate_device" default="none"/>
+  <xacro:arg name="top_plate_device" default="none"/>
+
+  <xacro:macro name="turtlebot" params="bottom_plate_device mid_plate_device top_plate_device has_wrist">
+
+    <xacro:unless value="${bottom_plate_device == 'none'}">
+
+      <xacro:if value="${bottom_plate_device == 'hokuyo_10lx'}">
+        <xacro:sensor_hokuyo_ust10lx prefix="front_laser" parent="base_link" prefix_topic="front_laser">
+          <origin xyz="0.150 0.0 0.184" rpy="0 0 0"/>
+        </xacro:sensor_hokuyo_ust10lx>
+      </xacro:if>
+
+      <xacro:if value="${bottom_plate_device == 'rplidar'}">
+        <xacro:sensor_rplidar prefix="front" parent="base_link">
+          <origin xyz="0.111 0.0 0.132" rpy="0 0 3.1415"/>
+        </xacro:sensor_rplidar>
+      </xacro:if>
+
+    <!-- UN IF POR CADA BOTTOM DEVICE POSIBLE-->
+    </xacro:unless>
+
+    <xacro:unless value="${mid_plate_device == 'none'}">
+      
+      <xacro:if value="${mid_plate_device == 'hokuyo_10lx'}">
+        <xacro:sensor_hokuyo_ust10lx prefix="front_laser" parent="base_link" prefix_topic="front_laser">
+          <origin xyz="0.150 0.0 0.184" rpy="0 0 0"/>
+        </xacro:sensor_hokuyo_ust10lx>
+      </xacro:if>
+    
+      <xacro:if value="${mid_plate_device == 'orbbec_astra'}">
+        <xacro:sensor_orbbec_astra prefix="front_rgbd_camera" parent="base_link" prefix_topic="front_rgbd_camera">
+          <origin xyz="0.1 0.0 0.32" rpy="0 0 0"/>
+        </xacro:sensor_orbbec_astra>	
+      </xacro:if>
+
+      <xacro:if value="${mid_plate_device == 'r200'}">
+        <xacro:sensor_r200  parent="base_link" >
+          <!--origin xyz="0.0 0.0 0.185" rpy="0 0 0"/-->
+        </xacro:sensor_r200>
+      </xacro:if>
+
+      <xacro:if value="${mid_plate_device == 'rplidar'}">
+        <xacro:sensor_rplidar prefix="front" parent="base_link">
+          <origin xyz="0.0 0.0 0.185" rpy="0 0 0"/>
+        </xacro:sensor_rplidar>
+      </xacro:if>
+
+
+      <!-- UN IF POR CADA MID DEVICE POSIBLE-->
+    </xacro:unless>
+
+    <xacro:unless value="${top_plate_device == 'none'}">
+
+      <xacro:if value="${top_plate_device == 'orbbec_astra'}">
+        <xacro:sensor_orbbec_astra prefix="front_rgbd_camera" parent="base_link" prefix_topic="front_rgbd_camera">
+          <origin xyz="0.150 0.0125 0.6" rpy="0 0 0"/>
+        </xacro:sensor_orbbec_astra>	
+      </xacro:if>
+
+      <xacro:if value="${top_plate_device == 'rplidar'}">
+        <xacro:sensor_rplidar prefix="front" parent="base_link">
+          <origin xyz="0.0 0.0 0.3" rpy="0 0 3.14"/>
+        </xacro:sensor_rplidar>
+      </xacro:if>
+
+      <xacro:if value="${top_plate_device == 'r200'}">
+        <xacro:sensor_r200  parent="base_link" >
+          <!--origin xyz="0.0 0.0 0.185" rpy="0 0 0"/-->
+        </xacro:sensor_r200>
+      </xacro:if>
+
+      <xacro:if value="${top_plate_device == 'widowx_arm'}">
+        <xacro:widowx_arm parent="base_footprint" prefix="widowx_arm">
+	      	<origin xyz="0.0 0.0 0.41" rpy="0.0 0.0 0.0"/>
+      	</xacro:widowx_arm>
+      </xacro:if>
+
+      <xacro:if value="${top_plate_device == 'phantomx_reactor_arm'}">
+        <xacro:if value="${has_wrist == 'true'}">
+        <xacro:phantomx_reactor_wrist prefix="" parent="base_link">
+	      	<origin xyz="0 0 0" rpy="0 0 0" />
+	      </xacro:phantomx_reactor_wrist>
+        </xacro:if>
+
+        <xacro:unless value="${has_wrist == 'true'}">
+          <xacro:phantomx_reactor_no_wrist prefix="arm_" parent="base_link">
+        		<origin xyz="0 0 0" rpy="0 0 0" />
+        	</xacro:phantomx_reactor_no_wrist>
+        </xacro:unless>
+      </xacro:if>
+    </xacro:unless>
+
+
+  </xacro:macro>
+  
+  <xacro:turtlebot top_plate_device="$(arg top_plate_device)"  mid_plate_device="$(arg mid_plate_device)" bottom_plate_device="$(arg bottom_plate_device)" has_wrist="$(arg has_wrist)"/>
+
+  <xacro:kobuki/>
+  <xacro:stack_hexagons parent="base_link"/>
+</robot>

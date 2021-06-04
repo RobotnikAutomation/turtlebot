@@ -26,3 +26,8 @@ subscribers:
     topic:       "input/navi"
     timeout:     1.0
     priority:    5
+  - name:        "move_base"
+    topic:       "navigation_velocity_smoother/raw_cmd_vel"
+    timeout:     1.0
+    priority:    4
+

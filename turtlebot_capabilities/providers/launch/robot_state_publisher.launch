@@ -2,13 +2,13 @@
 <launch>
   <arg name="base"       default="$(optenv TURTLEBOT_BASE kobuki)"/>  <!-- create, roomba -->
   <arg name="stacks"     default="$(optenv TURTLEBOT_STACKS hexagons)"/>  <!-- circles, hexagons -->
-  <arg name="3d_sensor"  default="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>  <!-- kinect, xtion -->
+  <arg name="mid_plate_device"  default="$(optenv TURTLEBOT_MID_PLATE_DEVICE kinect)"/>  <!-- kinect, xtion -->
   
   <!-- load the TurtleBot model -->
   <include file="$(find turtlebot_bringup)/launch/includes/description.launch.xml">
     <arg name="base" value="$(arg base)" />
     <arg name="stacks" value="$(arg stacks)" />
-    <arg name="3d_sensor" value="$(arg 3d_sensor)" />
+    <arg name="mid_plate_device" value="$(arg mid_plate_device)" />
   </include>
   
   <!-- start the robot state publisher -->

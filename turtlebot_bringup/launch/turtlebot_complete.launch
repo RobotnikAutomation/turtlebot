@@ -1,0 +1,94 @@
+<launch>
+  <!-- Turtlebot -->
+  <arg name="base"              default="$(env TURTLEBOT_BASE)"         doc="mobile base type [create, roomba]"/>
+  <arg name="battery"           default="$(env TURTLEBOT_BATTERY)"      doc="kernel provided locatio for battery info, use /proc/acpi/battery/BAT0 in 2.6 or earlier kernels." />
+  <arg name="stacks"            default="$(env TURTLEBOT_STACKS)"       doc="stack type displayed in visualisation/simulation [circles, hexagons]"/>
+  <arg name="bottom_plate_device"     default="$(env TURTLEBOT_BOTTOM_PLATE_DEVICE)"      doc="hokuyo_ust_10lx"/>
+  <arg name="mid_plate_device"  default="$(env TURTLEBOT_MID_PLATE_DEVICE)"    doc="3d sensor types [kinect, asux_xtion_pro]"/>
+  <arg name="top_plate_device"        default="$(optenv TURTLEBOT_TOP_PLATE_DEVICE)"      doc="top plate devices types [rplidar2, rplidar, widowx, reactor_no_wrist, reactor_wrist, pincher, urg04lx, notop, lilliput monitor]"/>  
+  <arg name="has_wrist"         default="$(env HAS_WRIST)"/>
+  <arg name="simulation"        default="$(env TURTLEBOT_SIMULATION)"   doc="set flags to indicate this turtle is run in simulation mode."/>
+  <arg name="cases"                   default="$(optenv TURTLEBOT_HAS_CASES)"             doc="set flags to indicate this turtle has cases"/>  
+  <arg name="serialport"        default="$(env TURTLEBOT_SERIAL_PORT)"  doc="used by create to configure the port it is connected on [/dev/ttyUSB0, /dev/ttyS0]"/>
+  <arg name="robot_name"        default="$(env TURTLEBOT_NAME)"         doc="used as a unique identifier and occasionally to preconfigure root namespaces, gateway/zeroconf ids etc."/>
+  <arg name="robot_type"        default="$(env TURTLEBOT_TYPE)"         doc="just in case you are considering a 'variant' and want to make use of this."/>
+  <arg name="prefix" default="robot_"/> 
+  <arg name="rplidar" default="true"/>
+  <arg name="hokuyo" default="false"/>
+  <arg name="astra_camera" default="true"/>
+
+
+ <!--Map_server and _amcl-->
+  <arg name="launch_amcl_and_mapserver" default="false"/>
+  <arg name="map_file" default="$(env TURTLEBOT_MAP_FILE)"/>
+  <arg name="frame_id" default="$(arg prefix)map"/>
+  <!--move_base-->
+
+  <arg name="launch_move_base" default="false"/>
+
+  <!--launch_pad-->
+  <arg name="launch_pad" default="true"/>
+
+  <!--gmapping-->
+  <arg name="launch_gmapping" default="false"/>
+  <arg name="x_init_pose" default="0"/>
+  <arg name="y_init_pose" default="0"/>
+  <arg name="z_init_pose" default="0"/>
+  <arg name="init_yaw" default="0"/>
+  <arg name="rviz" default="false"/>
+
+  <!--Elevator-->
+  <arg name="has_elevator" default="true"/>
+  <arg name="has_leds" default="true"/>
+
+  <!--params-->
+  <param name="/use_sim_time"        value="$(arg simulation)"/>
+
+  <include file="$(find turtlebot_bringup)/launch/includes/robot.launch.xml">
+    <arg name="base"                 value="$(arg base)" />
+    <arg name="stacks"               value="$(arg stacks)" />
+    <arg name="bottom_plate_device"  value="$(arg bottom_plate_device)" />
+    <arg name="mid_plate_device"     value="$(arg mid_plate_device)" />
+    <arg name="top_plate_device"     value="$(arg top_plate_device)" />
+    <arg name="has_wrist"            value="$(arg has_wrist)"/>
+    <arg name="cases"                value="$(arg cases)" />
+  </include>
+
+  <include file="$(find turtlebot_bringup)/launch/includes/mobile_base.launch.xml">
+    <arg name="base" value="$(arg base)" />
+    <arg name="serialport" value="$(arg serialport)" />
+  </include>
+
+  <!-- amcl and map server base-->
+  <include if="$(arg launch_amcl_and_mapserver)" file="$(find turtlebot_navigation)/launch/map_server.launch">
+  	<arg name="map_file" default="$(arg map_file)"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_navigation)/rviz/prueba_1.rviz"/>
+  </include>
+
+  <include if="$(arg launch_amcl_and_mapserver)" file="$(find turtlebot_navigation)/launch/amcl.launch"/>
+
+  <!--launch_pad-->
+  <include if="$(arg launch_pad)" file="$(find turtlebot_teleop)/launch/ps4_teleop.launch"/>
+  
+  <!--move_base -->
+  <include if="$(arg launch_move_base)" file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>
+
+  <!-- gmapping -->
+  <include if="$(arg launch_gmapping)" file="$(find turtlebot_navigation)/launch/gmapping_2d.launch"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_navigation)/rviz/prueba_1.rviz"/>
+  <!--laser_2d-->
+
+  <include if="$(arg hokuyo)"  file="$(find urg_node)/launch/urg_lidar.launch"/>
+  <include if="$(arg rplidar)"  file="$(find turtlebot_bringup)/launch/sensors/laser/rplidar.launch"/>
+
+  <!--ASTRA_CAMERA-->
+  <include if="$(arg astra_camera)" file="$(find astra_camera)/launch/astra.launch"/>
+
+  <!--include if="$(arg bottom_plate_device)=hokuyo_10lx" file="$(find urg_node)/launch/urg_lidar.launch"/-->
+  <!--include if="$(arg rviz)" file="$(find rviz)/launch/rviz.launch">	
+    <args="-d $(find turtlebot_navigation)/rviz/prueba_1.rviz"/>
+ </include-->
+
+  <include if="$(arg has_elevator)" file="$(find turtlebot_elevator)/launch/elevator_action.launch"/>
+  <include if="$(arg has_leds)" file="$(find robotnik_leds)/launch/robotnik_leds.launch"/>
+</launch>

@@ -1,0 +1,39 @@
+
+<launch>
+  <!-- Turtlebot -->
+  <arg name="base"                    default="$(env TURTLEBOT_BASE)"                     doc="mobile base type [create, roomba]"/>
+  <arg name="battery"                 default="$(env TURTLEBOT_BATTERY)"                  doc="kernel provided locatio for battery info, use /proc/acpi/battery/BAT0 in 2.6 or earlier kernels." />
+  <arg name="stacks"                  default="$(env TURTLEBOT_STACKS)"                   doc="stack type displayed in visualisation/simulation [circles, hexagons]"/>
+  <arg name="bottom_plate_device"     default="$(env TURTLEBOT_BOTTOM_PLATE_DEVICE)"      doc="hokuyo_ust_10lx"/>
+  <arg name="mid_plate_device"        default="$(env TURTLEBOT_MID_PLATE_DEVICE)"         doc="3d sensor types [kinect, asux_xtion_pro, astra, no3d, urg04lx]"/>
+  <arg name="top_plate_device"        default="$(optenv TURTLEBOT_TOP_PLATE_DEVICE)"      doc="top plate devices types [rplidar2, rplidar, widowx, reactor_no_wrist, reactor_wrist, pincher, urg04lx, notop, lilliput monitor]"/>
+  <arg name="cases"                   default="$(optenv TURTLEBOT_HAS_CASES)"             doc="set flags to indicate this turtle has cases"/>
+  <arg name="simulation"              default="$(env TURTLEBOT_SIMULATION)"               doc="set flags to indicate this turtle is run in simulation mode."/>
+  <arg name="serialport"              default="$(env TURTLEBOT_SERIAL_PORT)"              doc="used by create to configure the port it is connected on [/dev/ttyUSB0, /dev/ttyS0]"/>
+
+  <!--arg name="version" default="kobuki_hexagons_hokuyo_10lx_.urdf.xacro" />
+  <param name="turtlebot" command="$(find xacro)/xacro '$(find turtlebot_description)/robots/$(arg version)' laser:=\'$(arg mid_plate_device)\'" /-->
+  <param name="/use_sim_time"        value="$(arg simulation)"/>
+
+  <include file="$(find turtlebot_bringup)/launch/includes/robot.launch.xml">
+    <arg name="base"                 value="$(arg base)" />
+    <arg name="stacks"               value="$(arg stacks)" />
+    <arg name="bottom_plate_device"  value="$(arg bottom_plate_device)" />
+    <arg name="mid_plate_device"     value="$(arg mid_plate_device)" />
+    <arg name="top_plate_device"     value="$(arg top_plate_device)" />
+    <arg name="cases"                value="$(arg cases)" />
+  </include>
+  <include file="$(find turtlebot_bringup)/launch/includes/mobile_base.launch.xml">
+    <arg name="base"            value="$(arg base)" />
+    <arg name="serialport"      value="$(arg serialport)" />
+  </include>
+  <include file="$(find turtlebot_navigation)/launch/amcl_demo_copy.launch"/>
+  <include file="$(find urg_node)/launch/urg_lidar.launch"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_navigation)/rviz/prueba_1.rviz"/>
+ 
+
+  <!--include unless="$(eval arg('battery') == 'None')" file="$(find turtlebot_bringup)/launch/includes/netbook.launch.xml">
+    <arg name="battery" value="$(arg battery)" />
+  </include-->
+
+</launch>

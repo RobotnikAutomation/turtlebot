@@ -3,7 +3,7 @@
  -->
 <launch>
   <arg name="base"/>
-  <arg name="3d_sensor"/>
+  <arg name="mid_plate_device"/>
   <!-- Start capability server including parameters for base-specific default providers -->
   <arg name="test_case" default="minimal" />
   <arg name="debug" default="false" />
@@ -19,7 +19,7 @@
     <!-- base-specific default providers -->
     <rosparam file="$(find turtlebot_bringup)/param/$(arg base)/capability_providers.yaml" command="load"/>
     <!-- 3D sensor-specific default providers -->
-    <rosparam file="$(find turtlebot_bringup)/param/$(arg 3d_sensor)/capability_providers.yaml" command="load"/>
+    <rosparam file="$(find turtlebot_bringup)/param/$(arg mid_plate_device)/capability_providers.yaml" command="load"/>
     <rosparam param="package_whitelist">
       - minimal_pkg
       - std_capabilities

@@ -4,7 +4,7 @@
   <arg name="base"              default="$(env TURTLEBOT_BASE)"         doc="mobile base type [create, roomba]"/>
   <arg name="battery"           default="$(env TURTLEBOT_BATTERY)"      doc="kernel provided locatio for battery info, use /proc/acpi/battery/BAT0 in 2.6 or earlier kernels." />
   <arg name="stacks"            default="$(env TURTLEBOT_STACKS)"       doc="stack type displayed in visualisation/simulation [circles, hexagons]"/>
-  <arg name="3d_sensor"         default="$(env TURTLEBOT_3D_SENSOR)"    doc="3d sensor types [kinect, asux_xtion_pro, astra, no3d, urg04lx]"/>
+  <arg name="mid_plate_device"  default="$(env TURTLEBOT_MID_PLATE_DEVICE)"    doc="3d sensor types [kinect, asux_xtion_pro, astra, no3d, urg04lx]"/>
   <arg name="top_plate_device"  default="$(optenv TURTLEBOT_TOP_PLATE_DEVICE)" doc="top plate devices types [rplidar2, rplidar, widowx, reactor_no_wrist, reactor_wrist, pincher, urg04lx, notop, lilliput monitor]"/>
   <arg name="cases"             default="$(optenv TURTLEBOT_HAS_CASES)" doc="set flags to indicate this turtle has cases"/>
   <arg name="simulation"        default="$(env TURTLEBOT_SIMULATION)"   doc="set flags to indicate this turtle is run in simulation mode."/>
@@ -15,7 +15,7 @@
   <include file="$(find turtlebot_bringup)/launch/includes/robot.launch.xml">
     <arg name="base" value="$(arg base)" />
     <arg name="stacks" value="$(arg stacks)" />
-    <arg name="3d_sensor" value="$(arg 3d_sensor)" />
+    <arg name="mid_plate_device" value="$(arg mid_plate_device)" />
     <arg name="top_plate_device" value="$(arg top_plate_device)" />
     <arg name="cases" value="$(arg cases)" />
   </include>
@@ -23,8 +23,8 @@
     <arg name="base" value="$(arg base)" />
     <arg name="serialport" value="$(arg serialport)" />
   </include>
-  <include unless="$(eval arg('battery') == 'None')" file="$(find turtlebot_bringup)/launch/includes/netbook.launch.xml">
+  <!--include unless="$(eval arg('battery') == 'None')" file="$(find turtlebot_bringup)/launch/includes/netbook.launch.xml">
     <arg name="battery" value="$(arg battery)" />
-  </include>
+  </include-->
 
 </launch>

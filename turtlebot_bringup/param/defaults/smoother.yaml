@@ -3,7 +3,7 @@
 # which runs on top.
 
 # Mandatory parameters
-speed_lim_v: 0.8
+speed_lim_v: 4
 speed_lim_w: 5.4
 
 accel_lim_v: 0.3 # maximum is actually 2.0, but we push it down to be smooth

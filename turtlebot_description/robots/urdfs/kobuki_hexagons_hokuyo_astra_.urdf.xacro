@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+    - Base      : kobuki
+    - Stacks    : hexagons
+    - 3d Sensor : astra
+-->    
+<robot name="turtlebot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_common_library.urdf.xacro" />
+  <xacro:include filename="$(find kobuki_description)/urdf/kobuki.urdf.xacro" />
+  <xacro:include filename="$(find turtlebot_description)/urdf/stacks/hexagons.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/orbbec_astra.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/hokuyo.urdf.xacro"/>
+  <xacro:sensor_hokuyo_ust10lx prefix="front_laser" parent="base_link" prefix_topic="front_laser">
+		<origin xyz="0.150 0.0 0.184" rpy="0 0 0"/>
+	</xacro:sensor_hokuyo_ust10lx>
+  
+  <xacro:sensor_orbbec_astra prefix="front_rgbd_camera" parent="base_link" prefix_topic="front_rgbd_camera">
+		<origin xyz="0.234 0.0125 0.107" rpy="0 0 0"/>
+ 	</xacro:sensor_orbbec_astra>	
+  <xacro:kobuki/>
+  <xacro:stack_hexagons parent="base_link"/>
+  
+</robot>

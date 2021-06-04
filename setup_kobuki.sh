@@ -10,6 +10,6 @@
 
 export TURTLEBOT_BASE=kobuki
 export TURTLEBOT_STACKS=hexagons
-export TURTLEBOT_3D_SENSOR=kinect
+export TURTLEBOT_MID_PLATE_DEVICE=kinect
 export TURTLEBOT_TOP_PLATE_DEVICE=rplidar
 export TURTLEBOT_SIMULATION=false
