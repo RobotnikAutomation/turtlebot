@@ -10,38 +10,21 @@
 : ${TURTLEBOT_BASE:=kobuki}                           # create, roomba
 : ${TURTLEBOT_BATTERY:=/sys/class/power_supply/BAT0}  # /proc/acpi/battery/BAT0 in 2.6 or earlier kernels,  /sys/class/power_supply/ (kernels 3.0+) 
 : ${TURTLEBOT_STACKS:=hexagons}                       # circles, hexagons
-: ${TURTLEBOT_BOTTOM_PLATE_DEVICE:=rplidar}       # hokuyo_10lx
-: ${TURTLEBOT_MID_PLATE_DEVICE:=orbbec_astra}                 # kinect, asus_xtion_pro, asus_xtion_pro_offset
-: ${TURTLEBOT_TOP_PLATE_DEVICE:=none}                 #kinect, asus_xtion_pro, asus_xtion_pro_offset, rplidar
+: ${TURTLEBOT_MID_PLATE_DEVICE:=asus_xtion_pro}              # kinect, asus_xtion_pro, asus_xtion_pro_offset
 : ${TURTLEBOT_SIMULATION:=false}
 : ${TURTLEBOT_SERIAL_PORT:=/dev/kobuki}               # /dev/ttyUSB0, /dev/ttyS0
-: ${HAS_WRIST=false}
+
 : ${TURTLEBOT_NAME:=turtlebot}
 : ${TURTLEBOT_TYPE:=turtlebot}
 : ${TURTLEBOT_RAPP_PACKAGE_WHITELIST:=[rocon_apps, turtlebot_rapps]}
 : ${TURTLEBOT_RAPP_PACKAGE_BLACKLIST:=[]}
 : ${TURTLEBOT_INTERACTIONS_LIST:=[turtlebot_bringup/admin.interactions, turtlebot_bringup/documentation.interactions, turtlebot_bringup/pairing.interactions, turtlebot_bringup/visualisation.interactions]}
 
-: ${LAUNCH_AMC_MAPSERVER:=false}
-: ${LAUNCH_MOVE_BASE:=false}
-: ${LAUNCH_GMAPPING:=false}
-: ${HAS_ELEVATOR:=false}
-: ${HAS_LEDS:=false}
-: ${HAS_RPLIDAR:=false}
-: ${HAS_HOKUYO:=false}
-: ${HAS_ASTRA:=false}
-: ${LAUNCH_PAD:=false}
-
-: ${TURTLEBOT_MAP_FILE:=~/map.yaml}
-
 # Exports
 export TURTLEBOT_BASE
 export TURTLEBOT_BATTERY
 export TURTLEBOT_STACKS
-export TURTLEBOT_BOTTOM_PLATE_DEVICE
 export TURTLEBOT_MID_PLATE_DEVICE
-export TURTLEBOT_TOP_PLATE_DEVICE
-export HAS_WRIST
 export TURTLEBOT_SIMULATION
 export TURTLEBOT_SERIAL_PORT
 export TURTLEBOT_NAME
@@ -49,13 +32,3 @@ export TURTLEBOT_TYPE
 export TURTLEBOT_RAPP_PACKAGE_WHITELIST
 export TURTLEBOT_RAPP_PACKAGE_BLACKLIST
 export TURTLEBOT_INTERACTIONS_LIST
-export TURTLEBOT_MAP_FILE
-export LAUNCH_AMC_MAPSERVER
-export LAUNCH_MOVE_BASE
-export LAUNCH_GMAPPING
-export HAS_ELEVATOR
-export HAS_LEDS
-export HAS_RPLIDAR
-export HAS_HOKUYO
-export HAS_ASTRA
-export LAUNCH_PAD

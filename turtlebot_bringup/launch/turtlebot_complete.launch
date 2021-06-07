@@ -13,24 +13,24 @@
   <arg name="robot_name"        default="$(env TURTLEBOT_NAME)"         doc="used as a unique identifier and occasionally to preconfigure root namespaces, gateway/zeroconf ids etc."/>
   <arg name="robot_type"        default="$(env TURTLEBOT_TYPE)"         doc="just in case you are considering a 'variant' and want to make use of this."/>
   <arg name="prefix" default="robot_"/> 
-  <arg name="rplidar" default="true"/>
-  <arg name="hokuyo" default="false"/>
-  <arg name="astra_camera" default="true"/>
+  <arg name="rplidar" default="$(env HAS_RPLIDAR)"/>
+  <arg name="hokuyo" default="$(env HAS_HOKUYO)"/>
+  <arg name="astra_camera" default="$(env HAS_ASTRA)"/>
 
 
  <!--Map_server and _amcl-->
-  <arg name="launch_amcl_and_mapserver" default="false"/>
+  <arg name="launch_amcl_and_mapserver" default="$(env LAUNCH_AMC_MAPSERVER)"/>
   <arg name="map_file" default="$(env TURTLEBOT_MAP_FILE)"/>
   <arg name="frame_id" default="$(arg prefix)map"/>
   <!--move_base-->
 
-  <arg name="launch_move_base" default="false"/>
+  <arg name="launch_move_base" default="$(env LAUNCH_MOVE_BASE)"/>
 
   <!--launch_pad-->
-  <arg name="launch_pad" default="true"/>
+  <arg name="launch_pad" default="$(env LAUNCH_PAD)"/>
 
   <!--gmapping-->
-  <arg name="launch_gmapping" default="false"/>
+  <arg name="launch_gmapping" default="$(env LAUNCH_GMAPPING)"/>
   <arg name="x_init_pose" default="0"/>
   <arg name="y_init_pose" default="0"/>
   <arg name="z_init_pose" default="0"/>
@@ -38,8 +38,8 @@
   <arg name="rviz" default="false"/>
 
   <!--Elevator-->
-  <arg name="has_elevator" default="true"/>
-  <arg name="has_leds" default="true"/>
+  <arg name="has_elevator" default="$(env HAS_ELEVATOR)"/>
+  <arg name="has_leds" default="$(env HAS_LEDS)"/>
 
   <!--params-->
   <param name="/use_sim_time"        value="$(arg simulation)"/>
